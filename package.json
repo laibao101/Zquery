@@ -1,0 +1,21 @@
+{
+  "name": "zquery",
+  "version": "1.0.0",
+  "description": "modeled jquery personal ",
+  "main": "Zquery.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/laibao101/Zquery.git"
+  },
+  "author": "zhouhua",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/laibao101/Zquery/issues"
+  },
+  "homepage": "https://github.com/laibao101/Zquery#readme"
+}

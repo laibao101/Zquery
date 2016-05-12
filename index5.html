@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="src/js/ZQuery.js"></script>
+		<!--<script type="text/javascript" src="js/VQuery.js"></script>-->
+		<!--<script type="text/javascript" src="js/jquery.js"></script>-->
+		<script type="text/javascript">
+			$(function(){
+				$(".box").click(function(){
+					alert(111)
+				})
+				
+				
+				$("#btn1").click(function(){
+					$("#box").show();
+				});
+				
+				$("#btn2").click(function(){
+					$("#box").hide();
+				});
+				$("#btn3").toggle(function(){
+					$("#box").hide();
+				},function(){
+					$("#box").show();
+				});
+				/*$("#btn4").click(function(){
+					 $("#box").css('height','50px');
+					
+				});*/
+				$("#btn4").click(function(){
+					console.log( $("#txt").attr("value",'2222'))
+				})
+				$(".box").hover(function(){
+					$(this).css('background',"blue");
+				},function(){
+					$(this).css('background',"red");
+				})
+				
+				$(".box").eq(1).css("background","green");
+				
+				$("ul").find(".box").css("background","red");
+				
+				console.log( $("#txt").index() );
+			})
+			 
+		
+			
+		</script>
+		<style type="text/css">
+			div{width:100px; height:100px; background:red; margin:10px;}
+			#box{ background:blue; /*display: none*/;}
+		</style>
+		<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
+	</head>
+	<body>
+		<div id="box" class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>	
+		<input type="button"  value="显示" id="btn1"/>
+		<input type="button"  value="隐藏" id="btn2"/>
+		<input type="button" value="切换" id="btn3">
+		<input type="button" value="获取颜色" id="btn4">
+		<input type="text" id="txt" />
+		<ul>
+			<li class="box"><a href="">1</a></li>
+			<li><a href="">2</a></li>
+			<li><a href="">3</a></li>
+			<li class="box"><a href="">4</a></li>
+			<li id="li1"><a href="">5</a></li>
+		</ul>
+	</body>
+</html>

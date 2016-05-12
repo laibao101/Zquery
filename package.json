@@ -3,8 +3,14 @@
   "version": "1.0.0",
   "description": "modeled jquery personal ",
   "main": "Zquery.js",
-  "dependencies": {},
-  "devDependencies": {},
+  "dependencies": {
+    "grunt-contrib-jshint": "^1.0.0"
+  },
+  "devDependencies": {
+    "grunt-contrib-livereload": "^0.1.2",
+    "grunt-contrib-uglify": "^1.0.1",
+    "grunt-contrib-watch": "^1.0.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

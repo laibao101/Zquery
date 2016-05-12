@@ -136,6 +136,32 @@ ZQuery.prototype.index=function(){
 	}
 }
 
+ZQuery.prototype.addClass=function(className){
+	
+	for(var i=0; i<this.elements.length; i++){
+		if(this.elements[i].className==''){//原本是没有class
+			this.elements[i].className=className;
+		}else{//原本有class
+			var arr=[];
+			var count=0;
+			arr=this.elements[i].className.split(' ');
+			//如果要添加的类原本已经存在，就不添加
+			for(var j=0; j<arr.length; j++){
+				if(arr[j]!=className) count++;
+			}
+			
+			if(count == arr.length ) arr.push( className ); 
+			this.elements[i].className=arr.join(' ');
+		}
+	}
+}
+
+
+
+ZQuery.prototype.first=function(){
+	var aBro=this.elements[0].parentNode.children;
+	
+}
 function $(rArgs){
 	return new ZQuery(rArgs);
 }

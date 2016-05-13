@@ -9,6 +9,10 @@ function myEvent(obj,ev,fn){
 	}
 }
 
+
+
+
+
 function ZQuery(rArgs){
 	//用来保存选中的元素
 	this.elements=[];
@@ -36,6 +40,10 @@ function ZQuery(rArgs){
 			break;
 		
 	}
+	ZQuery.prototype.selector=function(){
+		return rArgs;
+	}
+	
 
 	
 }
@@ -75,7 +83,7 @@ ZQuery.prototype.css=function(attr,value){
 	}else{//获取样式
 		return	getStyle(this.elements[0],attr);
 	}
-	
+	return newZQuery(this);
 }
 
 ZQuery.prototype.attr=function(attr,value){
@@ -156,12 +164,124 @@ ZQuery.prototype.addClass=function(className){
 	}
 }
 
+ZQuery.prototype.removeClass=function(className){
+	
+	for(var i=0; i<this.elements.length; i++){
+		if(this.elements[i].className==''){//原本是没有class
+			//console.log("无")
+		}else{//有class
+			var arr=[];
+			var count=0;
+			var index=0;//记录class所在位置
+			arr=this.elements[i].className.split(' ');
+			//如果要删除的类存在
+			for(var j=0; j<arr.length; j++){
+				if(arr[j]==className){
+					count++;
+					index=j;
+				} 
+			}
+			
+			//存在
+			if(count != 0  ){
+				 arr.splice( className ,1);
+				 this.elements[i].className=arr.join(' ');
+				 
+			} 
+			
+		}
+	}
+	return newZQuery(this);
+}
+
 
 
 ZQuery.prototype.first=function(){
-	var aBro=this.elements[0].parentNode.children;
+	var arr=[];
+	var aBro;
+	if(this.selector().charAt(0)=='.'){//通过class选择过来的
+		aBro=this.elements[0].parentNode.getElementsByClassName(this.selector().substring(1));
+	}else{//通过tagname选择过来的
+		aBro=this.elements[0].parentNode.getElementsByTagName(this.elements[0].tagName);
+	}
+	toArray(arr,aBro);
+	return new ZQuery(arr[0]);
+}
+
+ZQuery.prototype.each=function(fn){
+	var arr=[];
+	var aBro;
+	if(this.selector().charAt(0)=='.'){//通过class选择过来的
+		aBro=this.elements[0].parentNode.getElementsByClassName(this.selector().substring(1));
+	}else{//通过tagname选择过来的
+		aBro=this.elements[0].parentNode.getElementsByTagName(this.elements[0].tagName);
+	}
+	toArray(arr,aBro);
+	for(var i=0; i<arr.length; i++){
+			callBack( arr[i], fn);
+	}
+	return new ZQuery(arr[0]);
 	
 }
+
+ZQuery.prototype.last=function(){
+	var arr=[];
+	var aBro;
+	if(this.selector().charAt(0)=='.'){//通过class选择过来的
+		aBro=this.elements[0].parentNode.getElementsByClassName(this.selector().substring(1));
+	}else{//通过tagname选择过来的
+		aBro=this.elements[0].parentNode.getElementsByTagName(this.elements[0].tagName);
+	}
+	toArray(arr,aBro);
+	return new ZQuery(arr[arr.length-1]);
+	
+}
+
+ZQuery.prototype.position=function(){
+	var arr=[];
+	if(this.elements[0].offsetParent==document.body || this.elements[0].offsetParent==html){//元素没有定位父级
+		arr.push( { top:this.elements[0].offsetTop,left:this.elements[0].offsetLeft } );
+	}else{//元素有定位父级
+		arr.push( { top:this.elements[0].offsetTop-this.elements[0].offsetParent.offsetTop,left:this.elements[0].offsetLeft-this.elements[0].offsetParent.offsetLeft } );
+	}
+
+	return arr[0];
+	
+}
+
+ZQuery.prototype.offset=function(){
+	var arr=[];
+	arr.push( { top:this.elements[0].offsetTop+this.elements[0].offsetParent.offsetTop,left:this.elements[0].offsetLeft+this.elements[0].offsetParent.offsetLeft } );
+	return arr[0];
+}
+
+ZQuery.prototype.hasClass=function(className){
+	var arr=[];
+	for(var i=0; i<this.elements.length; i++){
+		arr=this.elements[i].className.split(" ");
+		for(var j=0; j<arr.length; j++){
+			if(arr[j]==className){
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+ZQuery.prototype.is=function(Args){
+	switch( typeof Args){
+		case "string": //string
+			break;
+		case "function": //function
+			break;
+		case "object":
+			break;
+		default  ://element
+			break;
+	}
+}
+
+
 function $(rArgs){
 	return new ZQuery(rArgs);
 }
@@ -176,4 +296,15 @@ function toArray(arr1,arr2){
 	for(var i=0; i<arr2.length; i++){
 		arr1[i]=arr2[i];
 	}
+}
+
+function callBack(obj, fn){
+	fn.call(obj);
+}
+
+
+function newZQuery(obj){
+	var newZQuery=new ZQuery();
+	newZQuery.elements=obj.elements;
+	return newZQuery;
 }

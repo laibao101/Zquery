@@ -4,11 +4,10 @@
 		<meta charset="UTF-8">
 		<title></title>
 		<script type="text/javascript" src="src/js/ZQuery.js"></script>
-		<!--<script type="text/javascript" src="js/VQuery.js"></script>-->
-		<!--<script type="text/javascript" src="js/jquery.js"></script>-->
+		<!--<script type="text/javascript" src="src/js/jquery.js"></script>-->
 		<script type="text/javascript">
 			$(function(){
-				$(".box").click(function(){
+				/*$(".box").click(function(){
 					alert(111)
 				})
 				
@@ -24,7 +23,7 @@
 					$("#box").hide();
 				},function(){
 					$("#box").show();
-				});
+				});*/
 				/*$("#btn4").click(function(){
 					 $("#box").css('height','50px');
 					
@@ -44,8 +43,15 @@
 				
 				console.log( $("#txt").index() );*/
 				
-				$("ul").find("li").addClass("pox");
+				//$("ul").find("li").addClass("pox");
+				/*$(".box").each(function(){
+					$(this).css("background","green");
+				});*/
 				
+				//console.log(  $(".box").eq(3).position() );
+				//console.log( $(".box").eq(3).size())
+				//console.log(   $("ul").find(".box").is("li") )
+				console.log(typeof $(".box1"))
 			})
 			 
 		
@@ -66,12 +72,15 @@
 		<input type="button" value="切换" id="btn3">
 		<input type="button" value="获取颜色" id="btn4">
 		<input type="text" id="txt" />
-		<ul>
+		<p>p</p>
+		<ul style="position:relative">
 			<li ><a href="">1</a></li>
 			<li><a href="">2</a></li>
+			<p>p</p>
 			<li><a href="">3</a></li>
-			<li class="box box1 box2"><a href="">4</a></li>
+			<li class="box box1 box2" ><a href="">4</a></li>
 			<li id="li1"><a href="">5</a></li>
+			<p>p</p>
 		</ul>
 	</body>
 </html>
